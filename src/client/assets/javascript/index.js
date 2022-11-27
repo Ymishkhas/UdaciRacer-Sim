@@ -26,9 +26,9 @@ async function onPageLoad() {
 				const html = renderRacerCars(racers)
 				renderAt('#racers', html)
 			})
-	} catch(error) {
-		console.log("Problem getting tracks and racers ::", error.message)
-		console.error(error)
+	} catch(err) {
+		console.log("Problem getting tracks and racers ::", err.message)
+		console.err(err)
 	}
 }
 
@@ -65,14 +65,14 @@ function setupClickHandlers() {
 async function delay(ms) {
 	try {
 		return await new Promise(resolve => setTimeout(resolve, ms));
-	} catch(error) {
-		console.log("an error shouldn't be possible here")
-		console.log(error)
+	} catch(err) {
+		console.log("an err shouldn't be possible here")
+		console.log(err)
 	}
 }
 // ^ PROVIDED CODE ^ DO NOT REMOVE
 
-// This async function controls the flow of the race, add the logic and error handling
+// This async function controls the flow of the race, add the logic and err handling
 async function handleCreateRace() {
 
 	// TODO - Get player_id and track_id from the store
@@ -142,7 +142,7 @@ function runRace(raceID) {
 		renderAt('#race', resultsView(res.positions)) // to render the results view
 		reslove(res) // resolve the promise
 	*/
-	// remember to add error handling for the Promise
+	// remember to add err handling for the Promise
 }
 
 async function runCountdown() {
@@ -166,8 +166,8 @@ async function runCountdown() {
 			} ,1000);
 			
 		})
-	} catch(error) {
-		console.log(error);
+	} catch(err) {
+		console.log(err);
 	}
 }
 
@@ -358,20 +358,20 @@ function defaultFetchOpts() {
 	}
 }
 
-// TODO - Make a fetch call (with error handling!) to each of the following API endpoints 
+// TODO - Make a fetch call (with err handling!) to each of the following API endpoints 
 
 function getTracks() {
 	// GET request to `${SERVER}/api/tracks`
 	return fetch(`${SERVER}/api/tracks`)
-	.then(response => response.json())
-	.catch(error => console.log("Problem with getTracks request::", error))
+	.then(res => res.json())
+	.catch(err => console.log("Problem with getTracks request::", err))
 }
 
 function getRacers() {
 	// GET request to `${SERVER}/api/cars`
 	return fetch(`${SERVER}/api/cars`)
-	.then(response => response.json())
-	.catch(error => console.log("Problem with getRacers request::", error))
+	.then(res => res.json())
+	.catch(err => console.log("Problem with getRacers request::", err))
 }
 
 function createRace(player_id, track_id) {
@@ -392,8 +392,8 @@ function createRace(player_id, track_id) {
 function getRace(id) {
 	// GET request to `${SERVER}/api/races/${id}`
 	return fetch(`${SERVER}/api/races/${id}`)
-	.then(response => response.json())
-	.catch(error => console.log("Problem with getRace request::", error))
+	.then(res => res.json())
+	.catch(err => console.log("Problem with getRace request::", err))
 }
 
 function startRace(id) {
@@ -413,6 +413,6 @@ function accelerate(id) {
 	method: 'POST',
 	...defaultFetchOpts(),
 	})
-	.then(response => response)
-	.catch(error => console.log("Problem with accelerate request::", error))
+	.then(res => res)
+	.catch(err => console.log("Problem with accelerate request::", err))
 }
